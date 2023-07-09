@@ -1,4 +1,6 @@
-﻿namespace Domain.Entities
+﻿using Domain.Exceptions;
+
+namespace Domain.Entities
 {
     internal class Client
     {
@@ -18,16 +20,6 @@
         public void UpdateEmail(string email)
         {
             this.Email = email;
-        }
-
-        public void UpdatePhoneNumber(PhoneNumber phoneNumber)
-        {
-            var phone = Phones.FirstOrDefault(p => p.ToString() == phoneNumber.ToString());
-            
-            if (phone != null)
-            {
-                phone.UpdatePhoneNumber(phoneNumber);
-            }
         }
     }
 }
