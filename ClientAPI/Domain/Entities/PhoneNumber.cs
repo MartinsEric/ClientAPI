@@ -1,6 +1,4 @@
 ﻿using Domain.Enums;
-using System.Data;
-using System.Reflection.PortableExecutable;
 
 namespace Domain.Entities
 {
