@@ -12,6 +12,10 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<IGetAllClientsUseCase, GetAllClientsUseCase>();
 builder.Services.AddScoped<IGetByPhoneNumberUseCase, GetByPhoneNumberUseCase>();
+builder.Services.AddScoped<IAddClientUseCase, AddClientUseCase>();
+builder.Services.AddScoped<IUpdateClientEmailUseCase, UpdateClientEmailUseCase>();
+builder.Services.AddScoped<IUpdateClientPhoneUseCase, UpdateClientPhoneUseCase>();
+builder.Services.AddScoped<IDeleteClientUseCase, DeleteClientUseCase>();
 
 var app = builder.Build();
 

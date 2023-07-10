@@ -10,10 +10,11 @@ namespace Domain.Interfaces.Repositories
     public interface IClientRepository
     {
         Task<IEnumerable<Client>> GetAll();
+        Task<Client> GetById(Guid id);
         Task<Client> GetByPhoneNumber(string phoneNumber);
-        Task Add(Client cliente);
-        Task Update(Client cliente);
-        Task Delete(Guid id);
+        Task Add(Client client);
+        Task Update(Client client);
+        Task Delete(Client client);
         
     }
 }

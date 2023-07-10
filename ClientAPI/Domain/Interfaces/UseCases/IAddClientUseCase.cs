@@ -2,7 +2,7 @@
 
 namespace Domain.Interfaces.UseCases
 {
-    internal interface IAddClientUseCase
+    public interface IAddClientUseCase
     {
         Task Execute(Client client);
     }
