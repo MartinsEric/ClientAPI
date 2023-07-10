@@ -2,7 +2,7 @@
 
 namespace Domain.Entities
 {
-    internal class PhoneNumber
+    public class PhoneNumber
     {
         public string DDD { get; private set; }
         public string Number { get; private set; }

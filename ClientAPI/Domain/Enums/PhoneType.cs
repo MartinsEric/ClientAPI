@@ -1,6 +1,6 @@
 ﻿namespace Domain.Enums
 {
-    internal enum PhoneType
+    public enum PhoneType
     {
         Fixed,
         Mobile
