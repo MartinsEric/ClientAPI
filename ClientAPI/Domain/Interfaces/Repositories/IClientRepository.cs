@@ -9,11 +9,11 @@ namespace Domain.Interfaces.Repositories
 {
     public interface IClientRepository
     {
-        IEnumerable<Client> GetAll();
-        Client GetByPhoneNumber(string phoneNumber);
-        void Add(Client cliente);
-        void Update(Client cliente);
-        void Delete(Guid id);
+        Task<IEnumerable<Client>> GetAll();
+        Task<Client> GetByPhoneNumber(string phoneNumber);
+        Task Add(Client cliente);
+        Task Update(Client cliente);
+        Task Delete(Guid id);
         
     }
 }
