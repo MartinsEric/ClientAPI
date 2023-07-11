@@ -5,14 +5,21 @@
         public Guid Id { get; }
         public string Name { get; private set; }
         public string Email { get; private set; }
-        public IEnumerable<PhoneNumber> Phones{ get; private set; }
+        public ICollection<PhoneNumber> Phones{ get; private set; }
 
-        public Client(string name, string email, IEnumerable<PhoneNumber> phones)
+        protected Client() { }
+
+        public Client(string name, string email)
         {
             Id = Guid.NewGuid(); 
-            Phones = phones ?? new List<PhoneNumber>();
+            Phones = new List<PhoneNumber>();
             Name = name;   
             Email = email;
+        }
+
+        public void AddPhoneNumber(PhoneNumber phoneNumber)
+        {
+            Phones.Add(phoneNumber);
         }
 
         public void UpdateEmail(string email)
