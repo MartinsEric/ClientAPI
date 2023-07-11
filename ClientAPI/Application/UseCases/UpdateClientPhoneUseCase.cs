@@ -14,9 +14,9 @@ namespace Application.UseCases
             _phoneNumberRepository = phoneNumberRepository;
         }
 
-        public async Task Execute(Guid clientId, string phoneNumber, PhoneNumber newPhoneNumber)
+        public async Task Execute(string email, string phoneNumber, PhoneNumber newPhoneNumber)
         {
-            var client = await _clientRepository.GetById(clientId) ?? throw new ClientNotFoundException(clientId);
+            var client = await _clientRepository.GetByEmail(email) ?? throw new ClientNotFoundException(email);
             var phone = client.Phones.FirstOrDefault(phone => phone.ToString() == phoneNumber) ?? throw new PhoneNotFoundException(phoneNumber);
 
             phone.UpdatePhoneNumber(newPhoneNumber);

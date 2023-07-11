@@ -65,12 +65,12 @@ namespace WebAPI.Controllers
             return Ok(client);
         }
 
-        [HttpPut("{clientId}/email")]
-        public async Task<IActionResult> UpdateClientEmail(Guid clientId, [FromBody] string newEmail)
+        [HttpPut("{email}")]
+        public async Task<IActionResult> UpdateClientEmail(string email, [FromBody] string newEmail)
         {
             try
             {
-                await _updateClientEmailUseCase.Execute(clientId, newEmail);
+                await _updateClientEmailUseCase.Execute(email, newEmail);
                 return NoContent();
             }
             catch (ClientNotFoundException ex)
@@ -83,12 +83,12 @@ namespace WebAPI.Controllers
             }
         }
 
-        [HttpPut("{clientId}/phone/{phoneNumber}")]
-        public async Task<IActionResult> UpdateClientPhone(Guid clientId, string phoneNumber, [FromBody] PhoneNumber newPhoneNumber)
+        [HttpPut("{email}/phone/{phoneNumber}")]
+        public async Task<IActionResult> UpdateClientPhone(string email, string phoneNumber, [FromBody] PhoneNumber newPhoneNumber)
         {
             try
             {
-                await _updateClientPhoneUseCase.Execute(clientId, phoneNumber, newPhoneNumber);
+                await _updateClientPhoneUseCase.Execute(email, phoneNumber, newPhoneNumber);
                 return NoContent();
             }
             catch (ClientNotFoundException ex)
@@ -105,12 +105,12 @@ namespace WebAPI.Controllers
             }
         }
 
-        [HttpDelete("{clientId}")]
-        public async Task<IActionResult> DeleteClient(Guid clientId)
+        [HttpDelete("{email}")]
+        public async Task<IActionResult> DeleteClient(string email)
         {
             try
             {
-                await _deleteClientUseCase.Execute(clientId);
+                await _deleteClientUseCase.Execute(email);
                 return NoContent();
             }
             catch (ClientNotFoundException ex)

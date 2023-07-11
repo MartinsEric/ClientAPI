@@ -2,6 +2,6 @@
 {
     public interface IDeleteClientUseCase
     {
-        Task Execute(Guid clientId);
+        Task Execute(string email);
     }
 }

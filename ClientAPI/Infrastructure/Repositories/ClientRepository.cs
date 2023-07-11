@@ -29,6 +29,13 @@ namespace Infrastructure.Repositories
                 .ToListAsync();
         }
 
+        public async Task<Client?> GetByEmail(string email)
+        {
+            return await _dbContext.Clients
+                .Include(c => c.Phones)
+                .SingleOrDefaultAsync(c => c.Email == email);
+        }
+
         public async Task<Client?> GetById(Guid id)
         {
             return await _dbContext.Clients

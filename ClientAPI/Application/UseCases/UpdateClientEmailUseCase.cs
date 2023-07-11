@@ -15,9 +15,9 @@ namespace Application.UseCases
     {
         public UpdateClientEmailUseCase(IClientRepository clientRepository) : base(clientRepository) { }
 
-        public async Task Execute(Guid clientId, string newEmail)
+        public async Task Execute(string email, string newEmail)
         {
-            var client = await _clientRepository.GetById(clientId) ?? throw new ClientNotFoundException(clientId);
+            var client = await _clientRepository.GetByEmail(email) ?? throw new ClientNotFoundException(email);
             
             client.UpdateEmail(newEmail);
             await _clientRepository.Update(client);

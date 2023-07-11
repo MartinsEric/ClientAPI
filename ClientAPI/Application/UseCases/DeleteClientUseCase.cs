@@ -8,9 +8,9 @@ namespace Application.UseCases
     {
         public DeleteClientUseCase(IClientRepository clientRepository) : base(clientRepository) { }
 
-        public async Task Execute(Guid clientId)
+        public async Task Execute(string email)
         {
-            var client = await _clientRepository.GetById(clientId) ?? throw new ClientNotFoundException(clientId);
+            var client = await _clientRepository.GetByEmail(email) ?? throw new ClientNotFoundException(email);
             await _clientRepository.Delete(client);
         }
     }

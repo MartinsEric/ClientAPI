@@ -2,6 +2,6 @@
 {
     public interface IUpdateClientEmailUseCase
     {
-        Task Execute(Guid clientId, string newEmail);
+        Task Execute(string email, string newEmail);
     }
 }

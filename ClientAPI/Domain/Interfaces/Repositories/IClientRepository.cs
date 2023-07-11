@@ -11,6 +11,7 @@ namespace Domain.Interfaces.Repositories
     {
         Task<IEnumerable<Client>> GetAll();
         Task<Client?> GetById(Guid id);
+        Task<Client?> GetByEmail(string email);
         Task<Client?> GetByPhoneNumber(string phoneNumber);
         Task Add(Client client);
         Task Update(Client client);
