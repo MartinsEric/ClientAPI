@@ -8,7 +8,7 @@ namespace Application.UseCases
     {
         public GetByPhoneNumberUseCase(IClientRepository clientRepository) : base(clientRepository) { }
 
-        public Task<Client> Execute(string phoneNumber)
+        public Task<Client?> Execute(string phoneNumber)
         {
             return _clientRepository.GetByPhoneNumber(phoneNumber);
         }
