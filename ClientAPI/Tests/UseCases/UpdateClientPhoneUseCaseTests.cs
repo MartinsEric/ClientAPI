@@ -17,8 +17,8 @@ namespace Tests.UseCases
             var useCase = new UpdateClientPhoneUseCase(clientRepositoryMock.Object, phoneNumberRepositoryMock.Object);
             var phoneNumber = new PhoneNumber("021", "999999999", PhoneType.Mobile);
             var newPhoneNumber = new PhoneNumber("021", "988888888", PhoneType.Mobile);
-            var phoneList = new List<PhoneNumber> { phoneNumber };
-            var client = new Client("Bruce Wayne", "notbatman@dc.com", phoneList);
+            var client = new Client("Bruce Wayne", "notbatman@dc.com");
+            client.AddPhoneNumber(phoneNumber);
             var clientId = client.Id;
             
             clientRepositoryMock.Setup(r => r.GetById(clientId)).ReturnsAsync(client);
@@ -60,7 +60,8 @@ namespace Tests.UseCases
             var newPhoneNumber = new PhoneNumber("021", "988888888", PhoneType.Mobile);
             var wrongPhoneNumber = "021123456789";
             var phoneList = new List<PhoneNumber> { phoneNumber };
-            var client = new Client("Bruce Wayne", "notbatman@dc.com", phoneList);
+            var client = new Client("Bruce Wayne", "notbatman@dc.com");
+            client.AddPhoneNumber(phoneNumber);
 
             clientRepositoryMock.Setup(r => r.GetById(clientId)).ReturnsAsync(client);
 

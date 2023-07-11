@@ -16,7 +16,9 @@ namespace Tests.UseCases
             var phone1 = new PhoneNumber("021", "999999999", PhoneType.Mobile);
             var phone2 = new PhoneNumber("021", "988888888", PhoneType.Mobile);
             var phoneList = new List<PhoneNumber> { phone1, phone2 };
-            var expectedClient = new Client("Bruce Wayne", "notbatman@dc.com", phoneList);
+            var expectedClient = new Client("Bruce Wayne", "notbatman@dc.com");
+            expectedClient.AddPhoneNumber(phone1);
+            expectedClient.AddPhoneNumber(phone2);
             clientRepositoryMock.Setup(r => r.GetByPhoneNumber(phone1.ToString())).ReturnsAsync(expectedClient);
 
             var result = await useCase.Execute(phone1.ToString());

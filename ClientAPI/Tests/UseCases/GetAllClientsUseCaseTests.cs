@@ -13,12 +13,10 @@ namespace Tests.UseCases
         {
             var clientRepositoryMock = new Mock<IClientRepository>();
             var useCase = new GetAllClientsUseCase(clientRepositoryMock.Object);
-            var phone = new PhoneNumber("021", "999999999", PhoneType.Mobile);
-            var phoneList = new List<PhoneNumber> { phone };
             var expectedClients = new List<Client>
             {
-                new Client("Client1", "email1@email.com", phoneList),
-                new Client ("Client2", "email2@email.com", phoneList)
+                new Client("Client1", "email1@email.com"),
+                new Client ("Client2", "email2@email.com")
             };
 
             clientRepositoryMock.Setup(r => r.GetAll()).ReturnsAsync(expectedClients);

@@ -15,9 +15,7 @@ namespace Tests.UseCases
             var clientRepositoryMock = new Mock<IClientRepository>();
             var useCase = new UpdateClientEmailUseCase(clientRepositoryMock.Object);
             var newEmail = "newemail@email.com";
-            var phone = new PhoneNumber("021", "999999999", PhoneType.Mobile);
-            var phoneList = new List<PhoneNumber> { phone };
-            var client = new Client("Bruce Wayne", "notbatman@dc.com", phoneList);
+            var client = new Client("Bruce Wayne", "notbatman@dc.com");
             var clientId = client.Id;
 
             clientRepositoryMock.Setup(r => r.GetById(clientId)).ReturnsAsync(client);
