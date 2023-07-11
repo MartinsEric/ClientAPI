@@ -19,11 +19,10 @@ namespace Tests.UseCases
             var phoneList = new List<AddPhoneNumberDTO> { phone };
             var clientDTO = new AddClientDTO("Bruce Wayne", "notbatman@dc.com", phoneList);
             var client = clientDTO.Transform();
-            var clientId = client.Id;
 
-            clientRepositoryMock.Setup(r => r.GetById(clientId)).ReturnsAsync(client);
+            clientRepositoryMock.Setup(r => r.GetByEmail(client.Email)).ReturnsAsync(client);
 
-            await useCase.Execute(clientId);
+            await useCase.Execute(client.Email);
 
             clientRepositoryMock.Verify(r => r.Delete(client), Times.Once);
         }
@@ -33,11 +32,11 @@ namespace Tests.UseCases
         {
             var clientRepositoryMock = new Mock<IClientRepository>();
             var useCase = new DeleteClientUseCase(clientRepositoryMock.Object);
-            var clientId = Guid.NewGuid();
+            var email = "wrongemail@email.com";
 
-            clientRepositoryMock.Setup(r => r.GetById(clientId)).ReturnsAsync((Client)null);
+            clientRepositoryMock.Setup(r => r.GetByEmail(email)).ReturnsAsync((Client)null);
 
-            await Assert.ThrowsAsync<ClientNotFoundException>(() => useCase.Execute(clientId));
+            await Assert.ThrowsAsync<ClientNotFoundException>(() => useCase.Execute(email));
             clientRepositoryMock.Verify(r => r.Delete(It.IsAny<Client>()), Times.Never);
         }
     }

@@ -21,9 +21,9 @@ namespace Tests.UseCases
             client.AddPhoneNumber(phoneNumber);
             var clientId = client.Id;
             
-            clientRepositoryMock.Setup(r => r.GetById(clientId)).ReturnsAsync(client);
+            clientRepositoryMock.Setup(r => r.GetByEmail(client.Email)).ReturnsAsync(client);
 
-            await useCase.Execute(clientId, phoneNumber.ToString(), newPhoneNumber);
+            await useCase.Execute(client.Email, phoneNumber.ToString(), newPhoneNumber);
 
             var updatedPhone = client.Phones.FirstOrDefault(p => p.ToString() == phoneNumber.ToString());
             Assert.NotNull(updatedPhone);
@@ -39,13 +39,13 @@ namespace Tests.UseCases
             var clientRepositoryMock = new Mock<IClientRepository>();
             var phoneNumberRepositoryMock = new Mock<IPhoneNumberRepository>();
             var useCase = new UpdateClientPhoneUseCase(clientRepositoryMock.Object, phoneNumberRepositoryMock.Object);
-            var clientId = Guid.NewGuid();
+            var email = "wrongemail@email.com";
             var phoneNumber = "021999999999";
             var newPhoneNumber = new PhoneNumber("021", "988888888", PhoneType.Mobile);
 
-            clientRepositoryMock.Setup(r => r.GetById(clientId)).ReturnsAsync((Client)null);
+            clientRepositoryMock.Setup(r => r.GetByEmail(email)).ReturnsAsync((Client)null);
 
-            await Assert.ThrowsAsync<ClientNotFoundException>(() => useCase.Execute(clientId, phoneNumber, newPhoneNumber));
+            await Assert.ThrowsAsync<ClientNotFoundException>(() => useCase.Execute(email, phoneNumber, newPhoneNumber));
             phoneNumberRepositoryMock.Verify(r => r.Update(It.IsAny<PhoneNumber>()), Times.Never);
         }
 
@@ -63,9 +63,9 @@ namespace Tests.UseCases
             var client = new Client("Bruce Wayne", "notbatman@dc.com");
             client.AddPhoneNumber(phoneNumber);
 
-            clientRepositoryMock.Setup(r => r.GetById(clientId)).ReturnsAsync(client);
+            clientRepositoryMock.Setup(r => r.GetByEmail(client.Email)).ReturnsAsync(client);
 
-            await Assert.ThrowsAsync<PhoneNotFoundException>(() => useCase.Execute(clientId, wrongPhoneNumber, newPhoneNumber));
+            await Assert.ThrowsAsync<PhoneNotFoundException>(() => useCase.Execute(client.Email, wrongPhoneNumber, newPhoneNumber));
             phoneNumberRepositoryMock.Verify(r => r.Update(It.IsAny<PhoneNumber>()), Times.Never);
         }
     }
