@@ -1,9 +1,10 @@
-﻿using Domain.Entities;
+﻿using Domain.DTOs;
+using Domain.Entities;
 
 namespace Domain.Interfaces.UseCases
 {
     public interface IAddClientUseCase
     {
-        Task Execute(Client client);
+        Task Execute(AddClientDTO clientDTO);
     }
 }
